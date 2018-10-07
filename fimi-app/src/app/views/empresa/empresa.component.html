@@ -1,0 +1,55 @@
+<div class="pagina">
+  <!--Titulo-->
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Empresa</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!--Contenido-->
+  <div class="contenido">
+    <mat-card *ngFor="let empresa of empresas">
+      <mat-card-title>{{empresa.nombre}}</mat-card-title>
+      <mat-card-content>
+        <div class="form-container">
+          <mat-form-field>
+            <input matInput placeholder="C&oacute;digo" [(ngModel)]="empresa.codigo">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Nombre" [(ngModel)]="empresa.nombre">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Raz&oacute;n" [(ngModel)]="empresa.razon">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Tipo Empresa" [(ngModel)]="empresa.tipoEmpresa">
+              <mat-option *ngFor="let tipo of tiposEmpresa" [value]="tipo">
+                {{ tipo.tipoEmpresa }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Nit" [(ngModel)]="empresa.nit">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Direccion" [(ngModel)]="empresa.direccion">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Pa&iacute;s" [(ngModel)]="empresa.pais.pais">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Pa&iacute;s" [(ngModel)]="empresa.pais">
+              <mat-option *ngFor="let pais of paises" [value]="pais">
+                {{ pais.pais }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-slide-toggle placeholder="Estado" [color]="accent" [checked]="empresa.estado">
+          </mat-slide-toggle>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary">Editar</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

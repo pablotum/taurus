@@ -1,0 +1,166 @@
+<mat-dialog-content class="max-height">
+    <mat-tab-group>
+        <mat-tab label="Informaci&oacute;n General">
+            <div class="diolog-content">
+                <div class="fila">
+                    <mat-form-field class="input-full-width">
+                        <input matInput placeholder="codig&oacute;" [(ngModel)]="contacto.codigo">
+                    </mat-form-field>
+                    <mat-slide-toggle [color]="primary" [(ngModel)]="contacto.estado" [checked]="contacto.estado">
+                        Estado
+                    </mat-slide-toggle>
+                </div>
+                <div class="fila">
+                    <mat-form-field class="input-full-width">
+                        <input matInput placeholder="Nombre" [(ngModel)]="contacto.nombre">
+                    </mat-form-field>
+                    <mat-form-field class="input-full-width">
+                        <input matInput placeholder="Apellido" [(ngModel)]="contacto.apellido">
+                    </mat-form-field>
+                </div>
+                <div class="fila">
+                    <mat-form-field class="input-full-width">
+                        <input matInput [matDatepicker]="fecha" placeholder="Fecha de Nacimiento" [(ngModel)]="contacto.fechaNacimiento">
+                        <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
+                        <mat-datepicker #fecha></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="input-full-width">
+                        <mat-select [compareWith]="compareSexo" placeholder="Sexo" [(ngModel)]="contacto.sexo">
+                            <mat-option *ngFor="let sexo of sexos" [value]="sexo">
+                                {{ sexo.sexo }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+                <div class="fila">
+                    <mat-form-field class="input-full-width">
+                        <mat-select [compareWith]="compareEstado" placeholder="Estado Civil" [(ngModel)]="contacto.estadoCivil">
+                            <mat-option *ngFor="let estado of estados" [value]="estado">
+                                {{ estado.estadoCivil }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="input-full-width">
+                        <mat-select [compareWith]="compareProfesion" placeholder="Profesion" [(ngModel)]="contacto.profesion">
+                            <mat-option *ngFor="let profesion of profesiones" [value]="profesion">
+                                {{ profesion.profesion }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <mat-form-field class="input-full-width">
+                    <input matInput placeholder="Direcci&oacute;n" [(ngModel)]="contacto.direccion">
+                </mat-form-field>
+                <div class="fila">
+                    <mat-form-field class="input-full-width">
+                        <input matInput placeholder="Ciudad" [(ngModel)]="contacto.ciudad">
+                    </mat-form-field>
+                    <mat-form-field class="input-full-width">
+                        <mat-select [compareWith]="comparePais" placeholder="Pa&iacute;s" [(ngModel)]="contacto.pais">
+                            <mat-option *ngFor="let pais of paises" [value]="pais">
+                                {{ pais.pais }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Tel&eacute;fonos">
+            <div class="diolog-content">
+                <button mat-icon-button color="primary" (click)="telefonoContacto(contacto)">
+                    <mat-icon>phone</mat-icon> Nuevo
+                </button>
+                <table mat-table [dataSource]="contacto.telefonos" style="width: 100%;">
+                    <ng-container matColumnDef="telefono">
+                        <th mat-header-cell *matHeaderCellDef> Tel&eacute;fono </th>
+                        <td mat-cell *matCellDef="let telefono"> {{telefono.telefono}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="extension">
+                        <th mat-header-cell *matHeaderCellDef> Extensi&oacute;n </th>
+                        <td mat-cell *matCellDef="let telefono"> {{telefono.extension}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="estado">
+                        <th mat-header-cell *matHeaderCellDef> Estado </th>
+                        <td mat-cell *matCellDef="let telefono">
+                            <mat-slide-toggle [color]="primary" [(ngModel)]="telefono.estado" [checked]="telefono.estado">
+                                Estado
+                            </mat-slide-toggle>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="observacion">
+                        <th mat-header-cell *matHeaderCellDef> Observaci&oacute;n </th>
+                        <td mat-cell *matCellDef="let telefono"> {{ telefono.observacion }}
+                        </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+
+                        <td mat-cell *matCellDef="let telefono">
+                            <button mat-icon-button color="warn" matTooltip="Eliminar contacto">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="['telefono', 'extension', 'estado', 'observacion', 'action']"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['telefono', 'extension', 'estado', 'observacion', 'action'];"
+                        (dblclick)="openDialog(row)">
+                    </tr>
+                </table>
+            </div>
+        </mat-tab>
+        <mat-tab label="Correos Electronicos">
+            <div class="diolog-content">
+                    <button mat-icon-button color="primary" (click)="correoContacto(contacto)">
+                            <mat-icon>email</mat-icon> Nuevo
+                        </button>
+                        <table mat-table [dataSource]="contacto.correos" style="width: 100%;">
+                            <ng-container matColumnDef="correo">
+                                <th mat-header-cell *matHeaderCellDef> Correo electronico </th>
+                                <td mat-cell *matCellDef="let correo"> {{correo.correo}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="estado">
+                                    <th mat-header-cell *matHeaderCellDef> Estado </th>
+                                    <td mat-cell *matCellDef="let correo">
+                                        <mat-slide-toggle [color]="primary" [(ngModel)]="correo.estado" [checked]="correo.estado">
+                                            Estado
+                                        </mat-slide-toggle>
+                                    </td>
+                                </ng-container>
+                            <ng-container matColumnDef="observacion">
+                                <th mat-header-cell *matHeaderCellDef> Observaci&oacute;n </th>
+                                <td mat-cell *matCellDef="let correo"> {{correo.observacion}} </td>
+                            </ng-container>
+                                  
+        
+                            <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef> </th>
+        
+                                <td mat-cell *matCellDef="let correo">
+                                    <button mat-icon-button color="warn" matTooltip="Eliminar contacto">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+        
+                            <tr mat-header-row *matHeaderRowDef="['correo', 'estado', 'observacion', 'action']"></tr>
+                            <tr mat-row *matRowDef="let row; columns: ['correo', 'estado', 'observacion', 'action'];"
+                                (dblclick)="openDialog(row)">
+                            </tr>
+                        </table>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-raised-button color="primary" (click)="saveContacto()">Guardar</button>
+</mat-dialog-actions>

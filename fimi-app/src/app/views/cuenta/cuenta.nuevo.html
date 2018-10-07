@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Cuenta Contable</h2>
+<mat-dialog-content>
+    <div class="dialog-container">
+        <mat-form-field>
+            <input matInput placeholder="Cuenta Contable" [(ngModel)]="cuenta.cuentaContable">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Descripion" [(ngModel)]="cuenta.descripcion">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select [compareWith]="compareClasificacion" placeholder="Clasificaci&oacute;n" [(ngModel)]="cuenta.clasificacion">
+                <mat-option *ngFor="let clasificacion of clasificaciones" [value]="clasificacion">
+                    {{ clasificacion.clasificacionCuenta }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select [compareWith]="compareUso" placeholder="Uso" [(ngModel)]="cuenta.uso">
+                <mat-option *ngFor="let uso of usos" [value]="uso">
+                    {{ uso.usoCuenta }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select [compareWith]="compareFlujo" placeholder="Flujo" [(ngModel)]="cuenta.flujo">
+                <mat-option *ngFor="let flujo of flujos" [value]="flujo">
+                    {{ flujo.flujoCuenta }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-slide-toggle [color]="primary" [(ngModel)]="cuenta.bloqueo" [checked]="cuenta.bloqueo">
+            Bloqueo
+        </mat-slide-toggle>
+        
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-raised-button color="primary" (click)="saveCuenta()">Guardar</button>
+</mat-dialog-actions>

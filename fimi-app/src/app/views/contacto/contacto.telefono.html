@@ -1,0 +1,21 @@
+<mat-dialog-content>
+    <div class="fila">
+        <mat-form-field>
+            <input matInput placeholder="Tel&eacute;fono" [(ngModel)]="telefono.telefono">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Extensi&oacute;n" [(ngModel)]="telefono.extesinon">
+        </mat-form-field>
+        <mat-slide-toggle [color]="primary" [(ngModel)]="telefono.estado" [checked]="telefono.estado">
+            Estado
+        </mat-slide-toggle>
+    </div>
+    <mat-form-field class="input-full-width">
+        <input matInput placeholder="Observaci&oacute;n" [(ngModel)]="telefono.observacion">
+    </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary" (click)="saveContacto()">Guardar</button>
+</mat-dialog-actions>

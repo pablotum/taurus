@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Entidad</h2>
+<mat-dialog-content>
+    <div class="dialog-container">
+        <mat-form-field>
+            <input matInput placeholder="C&oacute;digo" [(ngModel)]="entidad.codigo">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Nombre" [(ngModel)]="entidad.nombre">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Tel&eacute;fono" [(ngModel)]="entidad.telefono">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Correo electr&oacute;nico" [(ngModel)]="entidad.correo">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Direcci&oacute;n" [(ngModel)]="entidad.direccion">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Ciudad" [(ngModel)]="entidad.ciudad">
+        </mat-form-field>
+        <div class="fila">
+            <mat-form-field class="input-full-width">
+                <mat-select [compareWith]="compareObjects" placeholder="Pais" [(ngModel)]="entidad.pais">
+                    <mat-option *ngFor="let pais of paises" [value]="pais">
+                        {{ pais.pais }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="C&oacute;digo postal" [(ngModel)]="entidad.postal">
+            </mat-form-field>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-raised-button color="primary" (click)="saveEntidad()">Guardar</button>
+</mat-dialog-actions>

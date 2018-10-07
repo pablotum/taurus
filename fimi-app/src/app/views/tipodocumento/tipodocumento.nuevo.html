@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>Tipo de documento</h2>
+<mat-dialog-content>
+    <div class="dialog-container">
+        
+        <mat-form-field>
+            <input matInput placeholder="Tipo Documento" [(ngModel)]="documento.tipoDocumento">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Descripci&oacute;n" [(ngModel)]="documento.descripcion">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Abreviatura" [(ngModel)]="documento.abreviatura">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select [compareWith]="compareBanco" placeholder="Cuenta bancaria" [(ngModel)]="documento.cuentaBancaria">
+                <mat-option *ngFor="let cuenta of cuentas" [value]="cuenta">
+                    {{ cuenta.cuentaBancaria + ' - ' + cuenta.descripcion }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-radio-group [(ngModel)]="documento.operacion">
+            <mat-radio-button value=1>Debe</mat-radio-button>
+            <mat-radio-button value=2>Haber</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field>
+            <mat-select [compareWith]="compareCuenta" placeholder="Cuenta contable" [(ngModel)]="documento.cuentaContable">
+                <mat-option *ngFor="let contable of contables" [value]="contable">
+                    {{ contable.cuentaContable + ' - ' + contable.descripcion }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select [compareWith]="compareCuenta" placeholder="Contra partida" [(ngModel)]="documento.contraPartida">
+                <mat-option *ngFor="let contable of contables" [value]="contable">
+                    {{ contable.cuentaContable + ' - ' + contable.descripcion }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-slide-toggle [color]="primary" [(ngModel)]="documento.estado">
+            Activa
+        </mat-slide-toggle>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-raised-button color="primary" (click)="saveDocumento()">Guardar</button>
+</mat-dialog-actions>

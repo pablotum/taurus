@@ -1,0 +1,57 @@
+<!-- <h2 mat-dialog-title>Proyecto</h2> -->
+<mat-dialog-content class="dialog-container">
+    <div class="contenido">
+        <mat-form-field>
+            <input matInput placeholder="C&oacute;digo" [(ngModel)]="proyecto.codigo">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Nombre" [(ngModel)]="proyecto.nombre">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Descripci&oacute;n" [(ngModel)]="proyecto.descripcion">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select [compareWith]="compareEntidad" placeholder="Entidad" [(ngModel)]="proyecto.entidad">
+                <mat-option *ngFor="let entidad of entidades" [value]="entidad">
+                    {{ entidad.nombre }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select [compareWith]="compareConvenio" placeholder="Convenio" [(ngModel)]="proyecto.convenio">
+                <mat-option *ngFor="let convenio of convenios" [value]="convenio">
+                    {{ convenio.codigo + ' - ' + convenio.nombre }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="fila">
+            <mat-form-field>
+                <mat-select [compareWith]="compareMoneda" placeholder="Moneda" [(ngModel)]="proyecto.moneda">
+                    <mat-option *ngFor="let moneda of monedas" [value]="moneda">
+                        {{ moneda.moneda }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Monto" [(ngModel)]="proyecto.monto">
+            </mat-form-field>
+        </div>
+        <div class="fila">
+            <mat-form-field>
+                <input matInput [matDatepicker]="inicio" placeholder="Inicio" [(ngModel)]="proyecto.inicio">
+                <mat-datepicker-toggle matSuffix [for]="inicio"></mat-datepicker-toggle>
+                <mat-datepicker #inicio></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [matDatepicker]="fin" placeholder="Fin" [(ngModel)]="proyecto.fin">
+                <mat-datepicker-toggle matSuffix [for]="fin"></mat-datepicker-toggle>
+                <mat-datepicker #fin></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-raised-button color="primary" (click)="saveProyecto()">Guardar</button>
+</mat-dialog-actions>

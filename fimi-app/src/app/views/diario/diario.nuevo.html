@@ -1,0 +1,41 @@
+<!-- <h2 mat-dialog-title>Convenio</h2> -->
+<mat-dialog-content class="dialog-container">
+    <div class="contenido">
+        <div class="fila">
+            <mat-form-field>
+                <input matInput disabled placeholder="Asiento" [(ngModel)]="diario.asiento">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [matDatepicker]="fecha" placeholder="Fecha" [(ngModel)]="diario.fecha">
+                <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
+                <mat-datepicker #fecha></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <mat-form-field>
+            <input matInput placeholder="Descripci&oacute;n" [(ngModel)]="diario.descripcion">
+        </mat-form-field>
+
+        <div *ngFor="let det of diario.detalle">
+            <div class="fila">
+                <mat-form-field>
+                    <mat-select [compareWith]="compareCuenta" placeholder="Cuenta contable" [(ngModel)]="det.cuentaContable">
+                        <mat-option *ngFor="let cuenta of cuentas" [value]="cuenta">
+                            {{ cuenta.cuentaContable + ' - ' + cuenta.descripcion }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Debe" [(ngModel)]="det.debe">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Haber" [(ngModel)]="det.haber">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-raised-button color="primary" (click)="saveDiario()">Guardar</button>
+</mat-dialog-actions>

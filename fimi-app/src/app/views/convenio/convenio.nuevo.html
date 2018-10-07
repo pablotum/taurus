@@ -1,0 +1,50 @@
+<!-- <h2 mat-dialog-title>Convenio</h2> -->
+<mat-dialog-content class="dialog-container">
+    <div class="contenido">
+        <mat-form-field>
+            <input matInput placeholder="C&oacute;digo" [(ngModel)]="convenio.codigo">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Nombre" [(ngModel)]="convenio.nombre">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Descripci&oacute;n" [(ngModel)]="convenio.descripcion">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select [compareWith]="compareDonante" placeholder="Donante" [(ngModel)]="convenio.donante">
+                <mat-option *ngFor="let donante of donantes" [value]="donante">
+                    {{ donante.nombre }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="fila">
+            <mat-form-field>
+                <mat-select [compareWith]="compareMoneda" placeholder="Moneda" [(ngModel)]="convenio.moneda">
+                    <mat-option *ngFor="let moneda of monedas" [value]="moneda">
+                        {{ moneda.moneda }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Monto" [(ngModel)]="convenio.monto">
+            </mat-form-field>
+        </div>
+        <div class="fila">
+            <mat-form-field>
+                <input matInput [matDatepicker]="inicio" placeholder="Inicio" [(ngModel)]="convenio.inicio">
+                <mat-datepicker-toggle matSuffix [for]="inicio"></mat-datepicker-toggle>
+                <mat-datepicker #inicio></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [matDatepicker]="fin" placeholder="Fin" [(ngModel)]="convenio.fin">
+                <mat-datepicker-toggle matSuffix [for]="fin"></mat-datepicker-toggle>
+                <mat-datepicker #fin></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-raised-button color="primary" (click)="saveConvenio()">Guardar</button>
+</mat-dialog-actions>

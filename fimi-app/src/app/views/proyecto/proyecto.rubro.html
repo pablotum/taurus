@@ -1,0 +1,68 @@
+<h2 mat-dialog-title>Rubros</h2>
+<mat-dialog-content>
+    <mat-tab-group>
+        <mat-tab label="Rubros">
+
+            <div class="actividad-container">
+                <table mat-table [dataSource]="proyecto.rubros" style="width: 100%;">
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="codigo">
+                        <th mat-header-cell *matHeaderCellDef> C&oacute;digo </th>
+                        <td mat-cell *matCellDef="let rubro"> {{rubro.rubro.codigo}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="rubro">
+                        <th mat-header-cell *matHeaderCellDef> Rubro </th>
+                        <td mat-cell *matCellDef="let rubro"> {{rubro.rubro.rubro}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="descripcion">
+                        <th mat-header-cell *matHeaderCellDef> Descripci&oacute;n </th>
+                        <td mat-cell *matCellDef="let rubro"> {{ rubro.descripcion }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="monto">
+                        <th mat-header-cell *matHeaderCellDef> Monto </th>
+                        <td mat-cell *matCellDef="let rubro"> {{ rubro.monto | number:'1.2' }} </td>
+                    </ng-container>
+
+
+                    <tr mat-header-row *matHeaderRowDef="['codigo', 'rubro', 'descripcion', 'monto']"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['codigo', 'rubro', 'descripcion', 'monto'];">
+                    </tr>
+                </table>
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Nueva Rubro">
+
+            <div class="actividad-container">
+                <mat-form-field>
+                    <mat-select placeholder="Rubro" [(ngModel)]="proyectoRubro.rubro">
+                        <mat-option *ngFor="let rubro of rubros" [value]="rubro">
+                            {{ rubro.codigo + ' - ' + rubro.rubro }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Descripci&oacute;n" [(ngModel)]="proyectoRubro.descripcion">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Monto" [(ngModel)]="proyectoRubro.monto">
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" (click)="saveProyecto()">Agregar</button>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cerrar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. 
+    <button mat-raised-button color="primary" (click)="saveConvenio()">Guardar</button>-->
+</mat-dialog-actions>

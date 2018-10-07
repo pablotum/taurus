@@ -1,0 +1,87 @@
+<div class="pagina">
+  <!--Titulo-->
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Convenios</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!--Contenido-->
+  <div class="contenido">
+    <mat-toolbar>
+      <button mat-raised-button (click)="openDialog(null)">
+        <mat-icon>create_new_folder</mat-icon>Nueva convenio
+      </button>
+    </mat-toolbar>
+    <mat-card>
+      <mat-card-content>
+        <table mat-table [dataSource]="dataSource" style="width: 100%;">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="codigo">
+            <th mat-header-cell *matHeaderCellDef> C&oacute;digo </th>
+            <td mat-cell *matCellDef="let convenio"> {{convenio.codigo}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="convenio">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let convenio"> {{convenio.nombre}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="donante">
+            <th mat-header-cell *matHeaderCellDef> Donante </th>
+            <td mat-cell *matCellDef="let convenio"> {{ convenio.donante ? convenio.donante.nombre : ''}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="monto">
+            <th mat-header-cell *matHeaderCellDef> Monto </th>
+            <td mat-cell *matCellDef="let convenio"> {{ convenio.moneda.simbolo + (convenio.monto | number:'1.2')}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="inicio">
+            <th mat-header-cell *matHeaderCellDef> Inicio </th>
+            <td mat-cell *matCellDef="let convenio"> {{convenio.inicio | date:'dd/MM/yy'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fin">
+            <th mat-header-cell *matHeaderCellDef> Fin </th>
+            <td mat-cell *matCellDef="let convenio"> {{convenio.fin | date:'dd/MM/yy'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> </th>
+
+            <td mat-cell *matCellDef="let convenio">
+              <button mat-icon-button color="primary" matTooltip="Editar convenio" (click)="openDialog(convenio)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" matTooltip="Rubros de convenio" (click)="openRubro(convenio)">
+                <mat-icon>list</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" matTooltip="Desembolsos de convenio" (click)="openDesembolso(convenio)">
+                <mat-icon>attach_money</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" matTooltip="Actividades de convenio" (click)="openActividad(convenio)">
+                <mat-icon>format_list_numbered</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" matTooltip="Archivos convenio" (click)="openArchivo(convenio)">
+                <mat-icon>attachment</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" matTooltip="Eliminar convenio">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['codigo', 'convenio', 'donante', 'monto', 'inicio', 'fin', 'action']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['codigo', 'convenio', 'donante', 'monto', 'inicio', 'fin', 'action'];"
+            (dblclick)="openDialog(row)">
+          </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

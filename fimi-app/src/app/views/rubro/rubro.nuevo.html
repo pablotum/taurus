@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Rubro</h2>
+<mat-dialog-content>
+    <div class="dialog-container">
+        <mat-form-field>
+            <input matInput placeholder="C&oacute;digo" [(ngModel)]="rubro.codigo">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Rubro" [(ngModel)]="rubro.rubro">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Descripci&oacute;n" [(ngModel)]="rubro.descripcion">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select [compareWith]="compareCuenta" placeholder="Cuenta contable" [(ngModel)]="rubro.cuentaContable">
+                <mat-option *ngFor="let cuenta of cuentas" [value]="cuenta">
+                    {{ cuenta.cuentaContable + ' - ' + cuenta.descripcion }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-raised-button color="primary" (click)="saveRubro()">Guardar</button>
+</mat-dialog-actions>

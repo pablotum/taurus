@@ -1,0 +1,69 @@
+<div class="pagina">
+    <!--Titulo-->
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span>Tipo de Documentos</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <!--Contenido-->
+    <div class="contenido">
+      <mat-toolbar>
+        <button mat-raised-button (click)="openDialog(null)">
+          <mat-icon>folder</mat-icon>Nuevo tipo de documento</button>
+      </mat-toolbar>
+      <mat-card>
+        <mat-card-content>
+          <table mat-table [dataSource]="documentos" style="width: 100%;">
+  
+            <!-- Position Column -->
+            <ng-container matColumnDef="tipo">
+              <th mat-header-cell *matHeaderCellDef> Tipo documento </th>
+              <td mat-cell *matCellDef="let documento"> {{documento.tipoDocumento}} </td>
+            </ng-container>
+  
+            <!-- Name Column -->
+            <ng-container matColumnDef="descripcion">
+              <th mat-header-cell *matHeaderCellDef> Descripci&oacute;n </th>
+              <td mat-cell *matCellDef="let documento"> {{documento.descripcion}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="abreviatura">
+              <th mat-header-cell *matHeaderCellDef> Abreviatura </th>
+              <td mat-cell *matCellDef="let documento"> {{ documento.abreviatura }} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="operacion">
+              <th mat-header-cell *matHeaderCellDef> Operaci&oacute;n </th>
+              <td mat-cell *matCellDef="let documento"> {{documento.operacion==1?'Debe':'Haber'}} </td>
+            </ng-container>
+  
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="estado">
+              <th mat-header-cell *matHeaderCellDef> Estado </th>
+              <td mat-cell *matCellDef="let documento">
+                <mat-chip-list [hidden]="!documento.estado">
+                  <mat-chip color="primary" selected>Activo</mat-chip>
+                </mat-chip-list>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> </th>
+           
+              <td mat-cell *matCellDef="let documento"> 
+                <button mat-icon-button color="primary"
+                matTooltip="Editar tipo documento" (click)="openDialog(documento)">
+                  <mat-icon>edit</mat-icon></button>
+                  <button mat-icon-button color="warn"
+                matTooltip="Eliminar tipo documento" (click)="openConfirmar(documento)">
+                  <mat-icon>delete</mat-icon></button>
+              </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="['tipo', 'descripcion', 'abreviatura', 'operacion', 'estado', 'action']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['tipo', 'descripcion', 'abreviatura', 'operacion', 'estado', 'action'];" (dblclick)="openDialog(row)">
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

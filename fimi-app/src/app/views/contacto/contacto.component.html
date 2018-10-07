@@ -1,0 +1,77 @@
+<div class="pagina">
+  <!--Titulo-->
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Contactos</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!--Contenido-->
+  <div class="contenido">
+    <mat-toolbar>
+      <button mat-raised-button (click)="openDialog(null)">
+        <mat-icon>account_box</mat-icon>Nueva contacto
+      </button>
+    </mat-toolbar>
+    <mat-card>
+      <mat-card-content>
+        <table mat-table [dataSource]="dataSource" style="width: 100%;">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="codigo">
+            <th mat-header-cell *matHeaderCellDef> C&oacute;digo </th>
+            <td mat-cell *matCellDef="let contacto"> {{contacto.codigo}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let contacto"> {{contacto.nombre + ' ' + contacto.apellido}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef> Fecha Nac </th>
+            <td mat-cell *matCellDef="let contacto"> {{ contacto.fechaNacimiento | date:'dd/MM/yyyy' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="pais">
+            <th mat-header-cell *matHeaderCellDef> Pa&iacute;s </th>
+            <td mat-cell *matCellDef="let contacto"> {{ contacto.pais ? contacto.pais.pais : '' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let contacto">
+              <mat-chip-list [hidden]="!contacto.estado">
+                <mat-chip color="primary" selected>Activa</mat-chip>
+              </mat-chip-list>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> </th>
+
+            <td mat-cell *matCellDef="let contacto">
+              <button mat-icon-button color="primary" matTooltip="Editar contacto" (click)="openDialog(convenio)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" matTooltip="Archivos de contacto" (click)="openArchivo(convenio)">
+                <mat-icon>attachment</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" matTooltip="Eliminar contacto">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['codigo', 'nombre', 'fecha', 'pais', 'estado', 'action']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['codigo', 'nombre', 'fecha', 'pais', 'estado', 'action'];"
+            (dblclick)="openDialog(row)">
+          </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

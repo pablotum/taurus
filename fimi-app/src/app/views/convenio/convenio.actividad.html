@@ -1,0 +1,81 @@
+<h2 mat-dialog-title>Actividades</h2>
+<mat-dialog-content>
+    <mat-tab-group>
+        <mat-tab label="Actividades">
+
+            <div class="actividad-container">
+                <table mat-table [dataSource]="convenio.actividades" style="width: 100%;">
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="actividad">
+                        <th mat-header-cell *matHeaderCellDef>Actividad </th>
+                        <td mat-cell *matCellDef="let actividad"> {{actividad.actividad}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="descripcion">
+                        <th mat-header-cell *matHeaderCellDef> Descripci&oacute;n </th>
+                        <td mat-cell *matCellDef="let actividad"> {{actividad.descripcion}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="inicio">
+                        <th mat-header-cell *matHeaderCellDef> Inicio </th>
+                        <td mat-cell *matCellDef="let actividad"> {{ actividad.inicio | date:'d/M/yy' }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fin">
+                        <th mat-header-cell *matHeaderCellDef> Fin </th>
+                        <td mat-cell *matCellDef="let actividad"> {{ actividad.fin | date:'d/M/yy' }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fecha">
+                        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                        <td mat-cell *matCellDef="let actividad"> {{ actividad.fecha | date:'d/M/yy' }} </td>
+                    </ng-container>
+
+
+                    <tr mat-header-row *matHeaderRowDef="['actividad', 'descripcion', 'inicio', 'fin', 'fecha']"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['actividad', 'descripcion', 'inicio', 'fin', 'fecha'];">
+                    </tr>
+                </table>
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Nueva actividad">
+
+            <div class="actividad-container">
+                <mat-form-field>
+                    <input matInput placeholder="Actividad" [(ngModel)]="convenioActividad.actividad">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Descripci&oacute;n" [(ngModel)]="convenioActividad.descripcion">
+                </mat-form-field>
+                <div class="fila">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="inicio" placeholder="Inicio" [(ngModel)]="convenioActividad.inicio">
+                        <mat-datepicker-toggle matSuffix [for]="inicio"></mat-datepicker-toggle>
+                        <mat-datepicker #inicio></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="fin" placeholder="Fin" [(ngModel)]="convenioActividad.fin">
+                        <mat-datepicker-toggle matSuffix [for]="fin"></mat-datepicker-toggle>
+                        <mat-datepicker #fin></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="fecha" placeholder="Fecha maxima" [(ngModel)]="convenioActividad.fecha">
+                        <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
+                        <mat-datepicker #fecha></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <button mat-raised-button color="primary" (click)="saveConvenio()">Agregar</button>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cerrar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. 
+    <button mat-raised-button color="primary" (click)="saveConvenio()">Guardar</button>-->
+</mat-dialog-actions>

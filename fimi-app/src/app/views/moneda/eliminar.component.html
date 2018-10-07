@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Eliminar</h2>
+<mat-dialog-content>
+    <div class="dialog-container">
+        Eliminar moneda {{ moneda.moneda}}
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-raised-button (click)="eliminar()" color="warn">Eliminar</button>
+</mat-dialog-actions>

@@ -1,0 +1,99 @@
+<div class="pagina">
+  <!--Titulo-->
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Periodos Contables</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!--Contenido-->
+  <div class="contenido">
+    <mat-toolbar>
+      <button mat-raised-button>
+        <mat-icon>class</mat-icon>Nuevo periodo</button>
+    </mat-toolbar>
+    <mat-card>
+      <mat-card-content>
+        <table mat-table [dataSource]="periodos" style="width: 100%;">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="anio">
+            <th mat-header-cell *matHeaderCellDef> A&ntilde;o </th>
+            <td mat-cell *matCellDef="let periodo"> {{periodo.anio}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef> Descripci&oacute;n </th>
+            <td mat-cell *matCellDef="let periodo"> {{periodo.descripcion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="tasa">
+            <th mat-header-cell *matHeaderCellDef> Tasa (%) </th>
+            <td mat-cell *matCellDef="let periodo"> {{periodo.tasa}} </td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> </th>
+
+            <td mat-cell *matCellDef="let periodo">
+              <button mat-icon-button color="primary" matTooltip="Editar periodo" (click)="openDialog(moneda)">
+                <mat-icon>edit</mat-icon></button>
+              <button mat-icon-button color="warn" matTooltip="Eliminar periodo" (click)="openConfirmar(moneda)">
+                <mat-icon>delete</mat-icon></button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['anio', 'descripcion', 'tasa', 'action']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['anio', 'descripcion', 'tasa', 'action'];" (click)="seleccionar(row)">
+          </tr>
+        </table>
+<div class="separador"></div>
+        <!--detalle-->
+    <mat-card>
+      <mat-card-title>
+        Detalle periodo {{ periodoSeleccionado.descripcion }}
+      </mat-card-title>
+      <mat-card-content>
+        <table mat-table [dataSource]="periodoSeleccionado.detalle" style="width: 100%;">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="correlativo">
+            <th mat-header-cell *matHeaderCellDef> Correlativo </th>
+            <td mat-cell *matCellDef="let detalle"> {{detalle.correlativo}} </td>
+          </ng-container>
+          <ng-container matColumnDef="mes">
+            <th mat-header-cell *matHeaderCellDef> Mes </th>
+            <td mat-cell *matCellDef="let detalle"> {{detalle.inicia | date: 'MMMM' : 'GMT-6' : 'en_US'}} </td>
+          </ng-container>
+          <!-- Name Column -->
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef> Descripci&oacute;n </th>
+            <td mat-cell *matCellDef="let detalle"> {{detalle.descripcion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="inicio">
+            <th mat-header-cell *matHeaderCellDef> Inicio </th>
+            <td mat-cell *matCellDef="let detalle"> {{detalle.inicia | date: 'dd/MM/yyyy'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> </th>
+
+            <td mat-cell *matCellDef="let detalle">
+              <button mat-icon-button color="primary" matTooltip="Editar detalle" (click)="openDialog(moneda)">
+                <mat-icon>edit</mat-icon></button>
+              <button mat-icon-button color="warn" matTooltip="Eliminar detalle" (click)="openConfirmar(moneda)">
+                <mat-icon>delete</mat-icon></button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['correlativo', 'mes','descripcion', 'inicio', 'action']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['correlativo', 'mes', 'descripcion', 'inicio', 'action'];">
+          </tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+    <!--fin de detalle-->
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

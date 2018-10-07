@@ -1,0 +1,68 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar color="primary" class="mat-elevation-z6 menu">
+  <mat-toolbar-row>
+    <span></span>
+
+    <a mat-button routerLink="/home" routerLinkActive="active">Inicio</a>
+    <a mat-button routerLink="/actividad" routerLinkActive="active">Actividades</a>
+
+    <button mat-button [matMenuTriggerFor]="vertebrates">Configuraci&oacute;n</button>
+    <button mat-button [matMenuTriggerFor]="fish">Convenios</button>
+    <button mat-button [matMenuTriggerFor]="invertebrates">Subvenciones</button>
+    <button mat-button [matMenuTriggerFor]="amphibians">RRHH</button>
+
+    <mat-menu #animals="matMenu" xPosicion="after" yPosicion="below">
+      <button mat-menu-item [matMenuTriggerFor]="vertebrates">Catalogos</button>
+      <!--<button mat-menu-item [matMenuTriggerFor]="invertebrates">Invertebrates</button>-->
+    </mat-menu>
+    <mat-menu #animals="matMenu" xPosicion="after" yPosicion="below">
+      <button mat-menu-item [matMenuTriggerFor]="fish">Convenios</button>
+      <!--<button mat-menu-item [matMenuTriggerFor]="invertebrates">Invertebrates</button>-->
+    </mat-menu>
+    <mat-menu #animals="matMenu" xPosicion="after" yPosicion="below">
+      <button mat-menu-item [matMenuTriggerFor]="invertebrates">Subvenciones</button>
+      <!--<button mat-menu-item [matMenuTriggerFor]="invertebrates">Invertebrates</button>-->
+    </mat-menu>
+    <mat-menu #animals="matMenu" xPosicion="after" yPosicion="below">
+      <button mat-menu-item [matMenuTriggerFor]="amphibians">RRHH</button>
+      <!--<button mat-menu-item [matMenuTriggerFor]="invertebrates">Invertebrates</button>-->
+    </mat-menu>
+
+    <mat-menu #vertebrates="matMenu">
+      <button mat-menu-item routerLink="/moneda">Monedas</button>
+      <button mat-menu-item routerLink="/banco">Bancos</button>
+      <button mat-menu-item routerLink="/cuenta">Cuentas Contables</button>
+      <button mat-menu-item routerLink="/cuentabancaria">Cuentas Bancarias</button>
+      <button mat-menu-item routerLink="/tipodocumento">Tipo de documentos</button>
+      <button mat-menu-item routerLink="/rubro">Rubros</button>
+      
+      <button mat-menu-item routerLink="/diario">Diario</button>
+      
+    </mat-menu>
+
+    <mat-menu #invertebrates="matMenu">
+      <button mat-menu-item routerLink="/entidad">Entidad</button>
+      <button mat-menu-item routerLink="/proyecto">Subvenci&oacute;n</button>
+    </mat-menu>
+
+    <mat-menu #fish="matMenu">
+      <button mat-menu-item routerLink="/donante">Donantes</button>
+      <button mat-menu-item routerLink="/convenio">Convenio</button>
+    </mat-menu>
+
+    <mat-menu #amphibians="matMenu">
+      <button mat-menu-item routerLink="/puesto">Puestos</button>
+      <button mat-menu-item routerLink="/contacto">Contactos</button>
+      <button mat-menu-item routerLink="/planilla">Planilla</button>
+    </mat-menu>
+
+    <mat-menu #reptiles="matMenu">
+      <button mat-menu-item>Banded Day Gecko</button>
+      <button mat-menu-item>Banded Gila Monster</button>
+      <button mat-menu-item>Black Tree Monitor</button>
+      <button mat-menu-item>Blue Spiny Lizard</button>
+      <button mat-menu-item disabled>Velociraptor</button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>

@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>Cuenta Bancaria</h2>
+<form [formGroup]="cuentaForm" (ngSubmit)="onFormSubmit()">
+    <mat-dialog-content>
+
+        <div class="dialog-container">
+
+            <mat-form-field>
+                <input matInput placeholder="Cuenta" formControlName="cuentaBancaria" required>
+                <mat-error *ngIf="cuentaForm.get('cuentaBancaria')?.invalid">Campo requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Descripci&oacute;n" formControlName="descripcion" required>
+                <mat-error *ngIf="cuentaForm.get('descripcion')?.invalid">Campo requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select [compareWith]="compareTipo" placeholder="Tipo Cuenta" formControlName="tipoCuenta">
+                    <mat-option *ngFor="let item of tipocuentas" [value]="item">
+                        {{ item.tipoCuenta }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="cuentaForm.get('tipoCuenta')?.invalid">Seleccione una opci&oacute;n</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select [compareWith]="compareBanco" placeholder="Banco" #bancoSelect formControlName="banco">
+                    <mat-option *ngFor="let item of bancos" [value]="item">
+                        {{ item.nombre }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="bancoSelect.errorState && cuentaForm.get('banco').hasError('required')">
+                    Seleccione una opci&oacute;n
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select [compareWith]="compareMoneda" placeholder="Moneda" formControlName="moneda">
+                    <mat-option *ngFor="let item of monedas" [value]="item">
+                        {{ item.moneda }}
+                    </mat-option>                    
+                </mat-select>
+                <mat-error *ngIf="cuentaForm.get('moneda')?.invalid">Seleccione una opci&oacute;n</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select [compareWith]="compareCuenta" placeholder="Cuenta contable" formControlName="cuenta">
+                    <mat-option *ngFor="let item of cuentas" [value]="item">
+                        <span>{{item.cuentaContable}}</span> |
+                        <small>Descripci&oacute;n: {{item.descripcion}}</small>
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="cuentaForm.get('moneda')?.invalid">Seleccione una cuenta contable</mat-error>
+            </mat-form-field>
+            <mat-slide-toggle color="accent" formControlName="estado">
+                Activa
+            </mat-slide-toggle>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancelar</button>
+        <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+        <button mat-raised-button color="primary" [disabled]="!cuentaForm.valid" type="submit">Guardar</button>
+    </mat-dialog-actions>
+</form>

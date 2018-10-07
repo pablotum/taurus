@@ -1,0 +1,68 @@
+<h2 mat-dialog-title>Desembolsos</h2>
+<mat-dialog-content>
+    <mat-tab-group>
+        <mat-tab label="Desembolso">
+
+            <div class="actividad-container">
+                <table mat-table [dataSource]="proyecto.desembolsos" style="width: 100%;">
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="descripcion">
+                        <th mat-header-cell *matHeaderCellDef> Descripci&oacute;n </th>
+                        <td mat-cell *matCellDef="let desem"> {{desem.descripcion}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="fecha">
+                        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                        <td mat-cell *matCellDef="let desem"> {{desem.fecha | date:'dd/MM/yy'}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="monto">
+                        <th mat-header-cell *matHeaderCellDef>Monto </th>
+                        <td mat-cell *matCellDef="let desem"> {{ desem.monto | number:'1.2' }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="estado">
+                        <th mat-header-cell *matHeaderCellDef> Estado </th>
+                        <td mat-cell *matCellDef="let desem"> {{ desem.estado }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="desembolso">
+                        <th mat-header-cell *matHeaderCellDef> Desembolso </th>
+                        <td mat-cell *matCellDef="let desem"> {{ desem.fechaDesembolso | date:'dd/MM/yy' }} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="['descripcion', 'fecha', 'monto', 'estado', 'desembolso']"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['descripcion', 'fecha', 'monto', 'estado', 'desembolso'];">
+                    </tr>
+                </table>
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Nueva Desembolso">
+            <div class="actividad-container">
+                <mat-form-field>
+                    <input matInput placeholder="Descripci&oacute;n" [(ngModel)]="proyectoDesembolso.descripcion">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="fecha" placeholder="Fecha" [(ngModel)]="proyectoDesembolso.fecha">
+                    <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
+                    <mat-datepicker #fecha></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Monto" [(ngModel)]="proyectoDesembolso.monto">
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" (click)="saveProyecto()">Agregar</button>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cerrar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. 
+    <button mat-raised-button color="primary" (click)="saveConvenio()">Guardar</button>-->
+</mat-dialog-actions>
